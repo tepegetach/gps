@@ -103,3 +103,95 @@
         display: none;
     }
 }
+
+
+/* Network cards: staggered entrance and subtle interactive depth. */
+.network-grid > article {
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 550ms cubic-bezier(.2,1,.28,1),
+                background-color 500ms ease, box-shadow 550ms ease;
+}
+.network-grid > article::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(circle at 78% 18%,
+        rgba(166,112,255,.19), rgba(225,79,126,.07) 38%, transparent 75%);
+    opacity: 0;
+    transition: opacity 600ms ease;
+}
+.network-grid > article > img {
+    transition: transform 700ms cubic-bezier(.2,1,.28,1),
+                filter 700ms ease;
+}
+.network-grid > article strong {
+    transition: color 550ms ease, text-shadow 550ms ease;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .network-grid > article:hover {
+        transform: translateY(-5px);
+        background-color: rgba(255,255,255,.085);
+        box-shadow: 0 16px 32px rgba(0,0,0,.24), 0 0 20px rgba(147,89,255,.075);
+    }
+    .network-grid > article:hover::before { opacity: 1; }
+    .network-grid > article:hover > img {
+        transform: translate3d(0,-5px,0) scale(1.045);
+        filter: drop-shadow(0 5px 12px rgba(147,89,255,.14));
+    }
+    .network-grid > article:hover strong {
+        color: #f5eafd;
+        text-shadow: 0 0 18px rgba(179,129,255,.28);
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .networks.network-motion-ready .network-grid > article {
+        opacity: 0;
+        translate: 0 22px;
+        transition: opacity 760ms ease, translate 850ms cubic-bezier(.2,1,.28,1),
+                    transform 550ms cubic-bezier(.2,1,.28,1),
+                    background-color 500ms ease, box-shadow 550ms ease;
+    }
+    .networks.network-motion-ready.network-motion-visible .network-grid > article {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* Last cooperation card: a single soft highlight runs along the pink border. */
+@property --accent-edge-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+.process-grid .is-accent {
+    isolation: isolate;
+}
+.process-grid .is-accent::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 2px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: conic-gradient(from var(--accent-edge-angle),
+        transparent 0deg 288deg,
+        rgba(255,75,133,.04) 302deg,
+        rgba(255,105,151,.46) 317deg,
+        rgba(255,248,251,.96) 329deg,
+        rgba(255,91,149,.56) 341deg,
+        transparent 355deg 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: accent-edge-run 4300ms linear infinite;
+}
+@keyframes accent-edge-run {
+    to { --accent-edge-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .process-grid .is-accent::after { display: none; }
+}
