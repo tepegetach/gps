@@ -2,3 +2,9 @@
 @import url("responsive-fixes.css?v=20261015-adaptive");
 @import url("viewport-fixes.css?v=20261016-header");
 @import url("motion.css?v=20261118-v3");
+
+/* Lower only these two product images, without changing card animation. */
+.category-card.bg4 > img,
+.category-card.bg5 > img {
+    top: 8px;
+}
