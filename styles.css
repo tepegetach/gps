@@ -195,3 +195,73 @@
 @media (prefers-reduced-motion: reduce) {
     .process-grid .is-accent::after { display: none; }
 }
+
+
+/* First contact: square portrait beside the full name, revealed on hover. */
+.contact-grid .contact-card--portrait {
+    position: relative;
+}
+.contact-grid .contact-card--portrait .contact-person {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 14px;
+    align-items: center;
+    margin-top: 36px;
+}
+.contact-grid .contact-card--portrait .contact-person h3 {
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(21px, 1.75vw, 28px);
+    line-height: 1.12;
+}
+.contact-grid .contact-card--portrait .contact-person__portrait {
+    display: block;
+    width: 96px;
+    height: 96px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 10px 26px rgba(0,0,0,.18);
+    opacity: 0;
+    transform: translateY(9px) scale(.92);
+    transition: opacity 480ms ease, transform 600ms cubic-bezier(.2,1,.28,1);
+    pointer-events: none;
+}
+@media (min-width: 1201px) {
+    .contact-grid .contact-card--portrait { gap: 0; }
+    .contact-grid .contact-card--portrait .contact-person { margin-top: 48px; }
+    .contact-grid .contact-card--portrait .contact-links { margin-top: auto; }
+}
+@media (hover: hover) and (pointer: fine) {
+    .contact-grid .contact-card--portrait:hover .contact-person__portrait,
+    .contact-grid .contact-card--portrait:focus-within .contact-person__portrait {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+@media (hover: none) {
+    .contact-grid .contact-card--portrait .contact-person__portrait {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 760px) {
+    .contact-grid .contact-card--portrait .contact-person {
+        grid-template-columns: minmax(0, 1fr) 78px;
+        gap: 10px;
+        margin-top: 24px;
+    }
+    .contact-grid .contact-card--portrait .contact-person h3 { font-size: 22px; }
+    .contact-grid .contact-card--portrait .contact-person__portrait {
+        width: 78px;
+        height: 78px;
+        border-radius: 12px;
+    }
+    .contact-grid .contact-card--portrait .contact-links { margin-top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .contact-grid .contact-card--portrait .contact-person__portrait { transition: none; }
+}
