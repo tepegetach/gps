@@ -101,3 +101,30 @@ document.querySelectorAll('.geo-tabs [data-region]').forEach(tab => {
   }, { threshold: .12, rootMargin: '0px 0px 50px 0px' });
   observer.observe(grid);
 })();
+
+
+/* Network cards: one-time staggered reveal, with normal hover afterwards. */
+(() => {
+  const section = document.querySelector('.networks');
+  const grid = section?.querySelector('.network-grid');
+  if (!section || !grid) return;
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const cards = [...grid.querySelectorAll(':scope > article')];
+  if (!cards.length) return;
+  section.classList.add('network-motion-ready');
+  cards.forEach((card, index) => {
+    card.style.transitionDelay = (index * 95) + 'ms';
+    card.addEventListener('transitionend', event => {
+      if (event.propertyName === 'opacity') card.style.transitionDelay = '0ms';
+    }, { once: true });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    section.classList.add('network-motion-visible');
+    observer.disconnect();
+  }, { threshold: .12, rootMargin: '0px 0px 50px 0px' });
+  observer.observe(grid);
+})();
