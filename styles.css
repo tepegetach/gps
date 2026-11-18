@@ -8,3 +8,98 @@
 .category-card.bg5 > img {
     top: 8px;
 }
+
+
+/* EXPERIMENT: infrastructure photo-card motion.
+   Scope: two photo cards + their four existing capability cards only. */
+.infrastructure .photo-card {
+    isolation: isolate;
+}
+.infrastructure .photo-card::after {
+    z-index: 1;
+    pointer-events: none;
+}
+.infrastructure .photo-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+.infrastructure .photo-card:first-child::before {
+    background: radial-gradient(ellipse at 78% 63%, rgba(230, 56, 84, .22), transparent 64%);
+    transition: opacity 850ms ease;
+}
+.infrastructure .photo-card:last-child::before {
+    background: linear-gradient(108deg,
+        transparent 28%,
+        rgba(255,255,255,0) 38%,
+        rgba(255,255,255,.075) 50%,
+        rgba(255,255,255,0) 62%,
+        transparent 72%);
+    transform: translateX(-115%);
+    transition: transform 1400ms cubic-bezier(.22,1,.36,1), opacity 600ms ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .infrastructure .photo-card > img {
+        display: block;
+        transform: scale(1.025);
+        transform-origin: center;
+        transition: transform 1050ms cubic-bezier(.22,1,.36,1);
+        will-change: transform;
+    }
+    /* One-time scroll story: production → four capabilities → retail result. */
+    .infrastructure.infra-motion-ready .infra-grid > .photo-card,
+    .infrastructure.infra-motion-ready .capability-grid > article {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+        transition: opacity 780ms ease, transform 1000ms cubic-bezier(.22,1,.36,1);
+    }
+    .infrastructure.infra-motion-ready.infra-motion-visible .infra-grid > .photo-card,
+    .infrastructure.infra-motion-ready.infra-motion-visible .capability-grid > article {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+    .infrastructure.infra-motion-ready .infra-grid > .photo-card:first-child {
+        transition-delay: 0ms;
+    }
+    .infrastructure.infra-motion-ready .capability-grid > article:nth-child(1) {
+        transition-delay: 150ms;
+    }
+    .infrastructure.infra-motion-ready .capability-grid > article:nth-child(2) {
+        transition-delay: 280ms;
+    }
+    .infrastructure.infra-motion-ready .capability-grid > article:nth-child(3) {
+        transition-delay: 410ms;
+    }
+    .infrastructure.infra-motion-ready .capability-grid > article:nth-child(4) {
+        transition-delay: 540ms;
+    }
+    .infrastructure.infra-motion-ready .infra-grid > .photo-card:last-child {
+        transition-delay: 730ms;
+    }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .infrastructure .photo-card:first-child:hover > img {
+        transform: translate3d(4px,-5px,0) scale(1.065);
+    }
+    .infrastructure .photo-card:last-child:hover > img {
+        transform: translate3d(-5px,0,0) scale(1.065);
+    }
+    .infrastructure .photo-card:first-child:hover::before {
+        opacity: .85;
+    }
+    .infrastructure .photo-card:last-child:hover::before {
+        opacity: 1;
+        transform: translateX(115%);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .infrastructure .photo-card > img {
+        transition: none;
+    }
+    .infrastructure .photo-card::before {
+        display: none;
+    }
+}
