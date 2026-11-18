@@ -85,3 +85,19 @@ document.querySelectorAll('.geo-tabs [data-region]').forEach(tab => {
     cards.forEach(card => observer.observe(card));
   }
 })();
+
+
+/* EXPERIMENT: reveal only the infrastructure cards, one time. */
+(() => {
+  const section = document.querySelector('.infrastructure');
+  const grid = section?.querySelector('.infra-grid');
+  if (!section || !grid || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  section.classList.add('infra-motion-ready');
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    section.classList.add('infra-motion-visible');
+    observer.disconnect();
+  }, { threshold: .12, rootMargin: '0px 0px 50px 0px' });
+  observer.observe(grid);
+})();
