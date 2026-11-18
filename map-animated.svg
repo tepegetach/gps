@@ -252,10 +252,10 @@
   animation-iteration-count: infinite;
 }
 @keyframes map-small-dot-twinkle {
-  0%,10% { transform: scale(.03); opacity: 0; }
-  30% { transform: scale(.60); opacity: 1; }
-  46% { transform: scale(.60); opacity: 1; }
-  67%,100% { transform: scale(.03); opacity: 0; }
+  0%,5% { transform: scale(.03); opacity: 0; }
+  20% { transform: scale(.60); opacity: 1; }
+  58% { transform: scale(.60); opacity: 1; }
+  84%,100% { transform: scale(.03); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .map-native-small-dot { animation: none; transform: scale(.60); opacity: .65; }
