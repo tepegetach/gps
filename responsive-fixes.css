@@ -1,0 +1,105 @@
+.metrics,
+.category-grid,
+.logistics__grid,
+.network-grid,
+.process-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.contact-grid,
+.category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.metric-card,
+.metric-card__top,
+.hero__copy,
+.button {
+    min-width: 0;
+}
+.metric-card__top span {
+    min-width: 0;
+}
+@media (max-width: 1200px) {
+    .metrics,
+    .category-grid,
+    .network-grid,
+    .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .logistics__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 760px) {
+    .brand {
+        width: 200px;
+    }
+    .hero h1 {
+        font-size: 35px;
+        line-height: 1.06;
+        overflow-wrap: anywhere;
+    }
+    .hero h1 span {
+        display: block;
+    }
+    .hero__copy > p {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .hero__actions .button {
+        width: 100%;
+        padding-left: 14px;
+        font-size: 14px;
+    }
+    .button--arrow {
+        gap: 8px;
+        justify-content: space-between;
+    }
+    .button--arrow b {
+        flex: 0 0 50px;
+    }
+    .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: calc(100% - 40px);
+    }
+    .metric-card__top {
+        gap: 6px;
+    }
+    .metric-card__top span {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+    .metric-card__top img {
+        flex: 0 0 25px;
+    }
+    .category-grid,
+    .network-grid,
+    .process-grid,
+    .contact-grid,
+    .capability-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .logistics__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .site-header {
+        overflow: visible;
+    }
+    .menu-toggle {
+        flex: 0 0 50px;
+    }
+    .geo-stats strong {
+        font-size: 42px;
+    }
+    .geo-stats span {
+        display: block;
+        line-height: 1.15;
+    }
+    .mobile-cta .button {
+        font-size: 14px;
+        padding-inline: 12px;
+    }
+}

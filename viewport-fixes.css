@@ -1,0 +1,362 @@
+/* Responsive grids must shrink their tracks, not push content beyond them. */
+.metric-card,
+.category-card,
+.contact-grid article,
+.geo-panel,
+.geo-map,
+.hero__copy {
+    min-width: 0;
+}
+.brands,
+.brands__viewport {
+    overflow: hidden;
+}
+.brands__set {
+    flex: 0 0 auto;
+}
+
+/* The tablet header does not fit with five nav links and a CTA. */
+@media (max-width: 1200px) {
+    .site-header.shell {
+        padding-inline: 24px;
+    }
+    .site-header .wrapper > .button,
+    .site-header .main-nav {
+        display: none;
+    }
+    .site-header .menu-toggle {
+        position: static;
+        display: block;
+        flex: 0 0 50px;
+        margin-left: auto;
+        cursor: pointer;
+    }
+    .site-header.is-open .main-nav {
+        display: flex;
+        position: absolute;
+        top: calc(100% + 7px);
+        left: 24px;
+        right: 24px;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+        border-radius: 12px;
+        background: rgba(14, 21, 30, 0.96);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        z-index: 1001;
+    }
+    .site-header.is-open .main-nav a {
+        padding: 14px;
+    }
+}
+
+/* Tablet: adapt typography and content columns, NOT the background map. */
+@media (min-width: 761px) and (max-width: 1200px) {
+    .hero {
+        height: auto;
+        min-height: 80vw;
+        padding-bottom: 40vw;
+    }
+    .hero__copy {
+        width: min(100%, 690px);
+        padding-top: 100px;
+    }
+    .hero h1 {
+        font-size: clamp(42px, 5vw, 60px);
+        line-height: 1.02;
+    }
+    .hero__copy > p {
+        font-size: clamp(18px, 2vw, 22px);
+        margin: 32px 0 50px;
+    }
+    /* Same unscaled map artwork, shifted left only to fit a narrower viewport. */
+    .hero::after {
+        left: calc(190px - (1200px - 85vw) * 0.65);
+        background-size: 120%;
+        top: -70%;
+    }
+    .contact-grid a {
+        grid-template-columns: 60px minmax(0, 1fr);
+    }
+    .contact-grid a > span {
+        min-width: 0;
+    }
+}
+
+@media (min-width: 761px) and (max-width: 1050px) {
+    .geo-panel {
+        height: auto;
+        display: block;
+    }
+    .geo-tabs {
+        flex-direction: row;
+        gap: 8px;
+        padding: 10px;
+    }
+    .geo-tabs button {
+        min-width: 0;
+        padding: 16px 14px;
+    }
+    .geo-tabs strong {
+        font-size: 18px;
+        line-height: 1.2;
+    }
+    .geo-tabs span {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    .geo-map {
+        height: 440px;
+    }
+    .geo-stats {
+        top: 30px;
+        right: 15px;
+        width: 200px;
+    }
+    .geo-stats strong {
+        font-size: 48px;
+    }
+    .infra-grid {
+        grid-template-columns: 1fr;
+    }
+    .infra-grid .photo-card:first-child,
+    .infra-grid .photo-card:last-child {
+        height: 280px;
+    }
+    .capability-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .logistics__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    body {
+        padding-top: 76px;
+        background-position: center 20vw;
+        background-size: 1780px;
+    }
+    .wrapper {
+        padding: 0 20px;
+    }
+    .shell {
+        width: calc(100% - 40px);
+    }
+    .site-header.shell {
+        top: 0;
+        width: 100vw;
+        height: 64px;
+        padding: 0;
+    }
+    .site-header .brand {
+        width: 154px;
+        height: auto;
+        flex: 0 1 154px;
+    }
+    .site-header .menu-toggle {
+        right: auto;
+        top: auto;
+    }
+    .site-header.is-open .main-nav {
+        top: calc(100% + 0px);
+        left: 12px;
+        right: 12px;
+    }
+
+    /* Illustration remains a LARGE overshooting background, not a contained thumbnail.
+       On mobile it is positioned behind the text, never clipped by .hero. */
+    .hero {
+        width: calc(100% - 40px);
+        height: auto;
+        min-height: 0;
+        padding-bottom: 100vw;
+        overflow: visible;
+    }
+    .hero::after {
+        width: 1400px;
+        height: 1165px;
+        left: calc(50% - 750px);
+        top: 100px;
+        background-repeat: no-repeat;
+        background-size: 1400px auto;
+        opacity: 0.75;
+    }
+    .hero__copy {
+        width: 100%;
+        max-width: 100%;
+        padding-top: 45px;
+    }
+    .hero h1 {
+        font-size: clamp(30px, 8.3vw, 42px);
+        line-height: 1.05;
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: normal;
+    }
+    /* Retain the original HTML line breaks; JS no longer rewrites them on load. */
+    .hero h1 span {
+        display: inline;
+    }
+    .hero__copy > p {
+        width: 100%;
+        max-width: 100%;
+        white-space: normal;
+        font-size: 16px;
+        line-height: 1.4;
+        margin: 30px 0 35px;
+    }
+    .hero__actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    .hero__actions .button {
+        width: 100%;
+        min-width: 0;
+        font-size: 14px;
+        padding-left: 14px;
+        justify-content: center;
+    }
+    .button--arrow {
+        justify-content: space-between;
+        gap: 8px;
+    }
+    .button--arrow b {
+        flex: 0 0 50px;
+    }
+
+    .metrics {
+        grid-template-columns: 1fr;
+        width: calc(100% - 40px);
+    }
+    .metric-card {
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .metric-card__top {
+        gap: 6px;
+    }
+    .metric-card__top span {
+        min-width: 0;
+        font-size: 12px;
+        line-height: 1.25;
+    }
+    .metric-card__top img {
+        flex: 0 0 25px;
+    }
+    .metric-card strong {
+        font-size: clamp(36px, 11vw, 47px);
+    }
+    .metric-card--system {
+        grid-column: 1 / -1;
+    }
+    .category-grid,
+    .network-grid,
+    .process-grid,
+    .contact-grid,
+    .capability-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .logistics__grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .section h2 {
+        overflow-wrap: break-word;
+    }
+
+    /* Wide team illustration keeps its intended crop only inside its own visual. */
+    .team {
+        min-height: 0;
+    }
+    .team__visual {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .team__visual > img {
+        width: 170%;
+        max-width: none;
+        margin-left: -20%;
+        height: auto;
+    }
+    .team__copy h2 {
+        font-size: clamp(38px, 10vw, 50px);
+    }
+    .team__copy > p {
+        margin-top: 30px;
+    }
+    .contact-grid article,
+    .contact-links,
+    .contact-grid a {
+        min-width: 0;
+    }
+    .contact-grid a {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 8px;
+    }
+    .contact-grid a > span {
+        min-width: 0;
+        padding: 0 12px;
+        overflow-wrap: anywhere;
+        font-size: 14px;
+    }
+
+    .networks::after {
+        left: 0;
+        right: 0;
+    }
+
+    .footer__top {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+    }
+    .footer__top .brand {
+        width: min(160px, 100%);
+    }
+    .footer__top .button {
+        min-height: 46px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    .footer__bottom p {
+        overflow-wrap: anywhere;
+    }
+    .geo-stats strong {
+        font-size: clamp(30px, 10vw, 42px);
+    }
+    .geo-stats span {
+        line-height: 1.15;
+    }
+    .mobile-cta .button {
+        min-width: 0;
+        font-size: 14px;
+        padding-inline: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-position: center 76vw;
+        background-size: 1100px;
+    }
+
+    .location {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1700px) {
+    .wrapper,
+    section,
+    .footer {
+        max-width: 92vw;
+    }
+}
